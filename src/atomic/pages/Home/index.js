@@ -1,9 +1,9 @@
 import React from 'react';
 
-import UserSearch from '../../organisms/UserSearch';
+import UserSearchContainer from '../../../containers/UserSearch';
 
 const Home = () => {
-  return <UserSearch />;
+  return <UserSearchContainer />;
 };
 
 export default Home;

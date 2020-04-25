@@ -4,20 +4,25 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import store from './store';
 
 import Home from './atomic/pages/Home';
 import UserDetail from './atomic/pages/UserDetail';
 
 function App() {
   return (
-    <Router>
-      <div className="container mx-auto max-w-screen-sm mt-4">
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/detail/:username" component={UserDetail} exact />
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div className="container mx-auto max-w-screen-sm mt-4">
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/detail/:username" component={UserDetail} exact />
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
