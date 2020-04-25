@@ -7,13 +7,12 @@ import Button from '../../atoms/Button';
 import Link from '../../atoms/Link';
 import Modal from '../../atoms/Modal';
 
-const baseURL = 'https://api.github.com/users/';
+import { fetchUser } from '../../../actions/user';
 
 const UserDetail = (props) => {
   const { username } = props.match.params;
-  console.log(username)
+  const { user, pending, dispatch, error } = props;
 
-  const [userData, setUserData] = useState({});
   const [userFollowers, setUserFollowers] = useState([]);
   const [userFollowings, setUserFollowings] = useState([]);
 
@@ -23,27 +22,14 @@ const UserDetail = (props) => {
   const [userDataStatus, setUserDataStatus] = useState('');
 
   useEffect(() => {
-    setUserDataStatus('pending');
-    axios({
-      url: baseURL + username,
-      method: 'GET',
-      headers:{
-      }
-    })
-      .then(result => {
-        setUserDataStatus('resolved');
-        setUserData(result.data);
-      })
-      .catch(err => {
-        setUserDataStatus('rejected');
-      });
+    dispatch(fetchUser(username));
   }, []);
 
   const changeFollowersModalVisibility = () => {
     setUserFollowersModalVisibility(!isUserFollowersModalVisible);
     if (!userFollowers.length) {
       axios({
-        url: userData.followers_url,
+        url: user.followers_url,
         method: 'GET'
       })
         .then(result => {
@@ -55,7 +41,7 @@ const UserDetail = (props) => {
     setUserFollowingsModalVisible(!isUserFollowingsModalVisible);
     if (!userFollowers.length) {
       axios({
-        url: userData.following_url,
+        url: user.following_url,
         method: 'GET'
       })
         .then(result => {
@@ -66,16 +52,16 @@ const UserDetail = (props) => {
 
   return (
     <div>
-      {userDataStatus === 'pending' && <Text text="Loading..." />}
-      {userDataStatus === 'resolved' &&
+      {pending && <Text text="Loading..." />}
+      {!pending &&
         <React.Fragment>
-          <Image url={userData.avatar_url} width="100px" height="100px" />
-          <Text text={userData.login} />
-          <Button onClick={changeFollowersModalVisibility} text={`${userData.followers} Followers`} />
-          <Button onClick={changeFollowingsModalVisibility} text={`${userData.following} Following`} />
+          <Image url={user.avatar_url} width="100px" height="100px" />
+          <Text text={user.login} />
+          <Button onClick={changeFollowersModalVisibility} text={`${user.followers} Followers`} />
+          <Button onClick={changeFollowingsModalVisibility} text={`${user.following} Following`} />
         </React.Fragment>
       }
-      {userDataStatus === 'rejected' && <Text text="Ups, something wrong with fetch user data" />}
+      {!pending && error && <Text text="Ups, something wrong with fetch user data" />}
       {isUserFollowersModalVisible &&
         <Modal closeModal={changeFollowersModalVisibility}>
           <div>{userFollowers.length}</div>

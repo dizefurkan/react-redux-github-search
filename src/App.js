@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Home from './atomic/pages/Home';
-import UserDetail from './atomic/pages/UserDetail';
+import UserDetailContainer from './containers/UserDetail';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <div className="container mx-auto max-w-screen-sm mt-4">
           <Switch>
             <Route path="/" component={Home} exact />
-            <Route path="/detail/:username" component={UserDetail} exact />
+            <Route path="/detail/:username" component={UserDetailContainer} exact />
           </Switch>
         </div>
       </Router>
