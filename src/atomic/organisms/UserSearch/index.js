@@ -49,10 +49,11 @@ const UserSearch = () => {
       {isDataExist && status !== 'pending' &&
         <React.Fragment>
           <ul className="mt-3">
+            <Text text={`${data.length} user found`} className="mb-3 text-gray-500" />
             {data.map(item => (
-              <li>
-                <Link to={`/detail/${item.login}`}>
-                  <Image url={item.avatar_url} width="30px" height="30px" rounded />
+              <li className="mb-4">
+                <Link to={`/detail/${item.login}`} className="flex flex-row space-x-4 items-center">
+                  <Image url={item.avatar_url} width="50px" height="50px" rounded />
                   <Text text={item.login} />
                 </Link>
               </li>

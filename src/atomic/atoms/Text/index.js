@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Text = ({ text, type }) => {
+const Text = ({ text, type, className }) => {
   if (!text) return null;
 
   if (type === 'title') {
@@ -8,7 +8,7 @@ const Text = ({ text, type }) => {
   }
 
   return (
-    <span>{text}</span>
+    <div className={className}>{text}</div>
   )
 }
 

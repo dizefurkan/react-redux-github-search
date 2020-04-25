@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const Image = ({ url, width, height, isRounded }) => {
-  const imageClasses = classnames({ 'rounded': isRounded });
+const Image = ({ url, width, height, rounded }) => {
+  const imageClasses = classnames({ 'rounded-full': rounded });
 
   return (
     <img src={url} width={width} height={height} className={imageClasses} />
