@@ -41,7 +41,6 @@ const UserSearch = () => {
     fetchUsers();
   }, [inputValue]);
 
-  console.log(data)
   return (
     <div>
       <Text type="title" text="Hey, let's find some GitHub User ha?" />
