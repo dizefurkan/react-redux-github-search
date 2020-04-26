@@ -12,28 +12,28 @@ const UserDetail = (props) => {
     user,
     repos,
     followers,
-    followings,
+    following,
     fetchUser,
     fetchUserRepos,
     fetchUserFollowers,
-    fetchUserFollowings,
+    fetchUserFollowing,
   } = props;
 
   const [isUserFollowersModalVisible, setUserFollowersModalVisibility] = useState(false);
-  const [isUserFollowingsModalVisible, setUserFollowingsModalVisible] = useState(false);
+  const [isUserFollowingModalVisible, setUserFollowingModalVisible] = useState(false);
 
   useEffect(() => {
     fetchUser(username);
     fetchUserRepos(username);
     fetchUserFollowers(username);
-    fetchUserFollowings(username);
+    fetchUserFollowing(username);
   }, []);
 
   const changeFollowersModalVisibility = () => {
     setUserFollowersModalVisibility(!isUserFollowersModalVisible);
   };
-  const changeFollowingsModalVisibility = () => {
-    setUserFollowingsModalVisible(!isUserFollowingsModalVisible);
+  const changeFollowingModalVisibility = () => {
+    setUserFollowingModalVisible(!isUserFollowingModalVisible);
   };
 
   return (
@@ -44,7 +44,7 @@ const UserDetail = (props) => {
           <Image url={user.avatar_url} width="100px" height="100px" />
           <Text text={user.login} />
           <Button onClick={changeFollowersModalVisibility} text={`${user.followers} Followers`} />
-          <Button onClick={changeFollowingsModalVisibility} text={`${user.following} Following`} />
+          <Button onClick={changeFollowingModalVisibility} text={`${user.following} Following`} />
         </React.Fragment>
       }
       {user.status === 'rejected' && <Text text="Ups, something wrong with fetch user data" />}
@@ -63,11 +63,11 @@ const UserDetail = (props) => {
           </ul>
         </Modal>
       }
-      {isUserFollowingsModalVisible &&
-        <Modal closeModal={changeFollowingsModalVisibility}>
-          <div>{followings.data.length}</div>
+      {isUserFollowingModalVisible &&
+        <Modal closeModal={changeFollowingModalVisibility}>
+          <div>{following.data.length}</div>
           <ul className="mt-3">
-            {followings.data.map(following => (
+            {following.data.map(following => (
               <li>
                 <Link to={`/detail/${following.login}`}>
                   <Image url={following.avatar_url} width="30px" height="30px" rounded />

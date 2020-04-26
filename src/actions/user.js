@@ -13,9 +13,9 @@ export const FETCH_USER_FOLLOWERS_PENDING = 'FETCH_USER_FOLLOWERS_PENDING';
 export const FETCH_USER_FOLLOWERS_RESOLVED = 'FETCH_USER_FOLLOWERS_RESOLVED';
 export const FETCH_USER_FOLLOWERS_REJECTED = 'FETCH_USER_FOLLOWERS_REJECTED';
 
-export const FETCH_USER_FOLLOWINGS_PENDING = 'FETCH_USER_FOLLOWINGS_PENDING';
-export const FETCH_USER_FOLLOWINGS_RESOLVED = 'FETCH_USER_FOLLOWINGS_RESOLVED';
-export const FETCH_USER_FOLLOWINGS_REJECTED = 'FETCH_USER_FOLLOWINGS_REJECTED';
+export const FETCH_USER_FOLLOWING_PENDING = 'FETCH_USER_FOLLOWING_PENDING';
+export const FETCH_USER_FOLLOWING_RESOLVED = 'FETCH_USER_FOLLOWING_RESOLVED';
+export const FETCH_USER_FOLLOWING_REJECTED = 'FETCH_USER_FOLLOWING_REJECTED';
 
 const fetchUserPending = () => ({
   type: FETCH_USER_PENDING,
@@ -88,18 +88,18 @@ export const fetchUserRepos = (username = '') => {
 };
 
 const fetchUserFollowersPending = () => ({
-  type: FETCH_USER_FOLLOWINGS_PENDING,
+  type: FETCH_USER_FOLLOWERS_PENDING,
 });
 
-const fetchUserFollowersResolved = followings => ({
-  type: FETCH_USER_FOLLOWINGS_RESOLVED,
+const fetchUserFollowersResolved = followers => ({
+  type: FETCH_USER_FOLLOWERS_RESOLVED,
   payload: {
-    followings
+    followers
   }
 });
 
 const fetchUserFollowersRejected = error => ({
-  type: FETCH_USER_FOLLOWINGS_REJECTED,
+  type: FETCH_USER_FOLLOWERS_REJECTED,
   payload: {
     error
   }
@@ -122,37 +122,37 @@ export const fetchUserFollowers = (username = '') => {
   }
 };
 
-const fetchUserFollowingsPending = () => ({
-  type: FETCH_USER_FOLLOWERS_PENDING,
+const fetchUserFollowingPending = () => ({
+  type: FETCH_USER_FOLLOWING_PENDING,
 });
 
-const fetchUserFollowingsResolved = followers => ({
-  type: FETCH_USER_FOLLOWERS_RESOLVED,
+const fetchUserFollowingResolved = following => ({
+  type: FETCH_USER_FOLLOWING_RESOLVED,
   payload: {
-    followers
+    following
   }
 });
 
-const fetchUserFollowingsRejected = error => ({
-  type: FETCH_USER_FOLLOWERS_REJECTED,
+const fetchUserFollowingRejected = error => ({
+  type: FETCH_USER_FOLLOWING_REJECTED,
   payload: {
     error
   }
 });
 
-export const fetchUserFollowings = (username = '') => {
+export const fetchUserFollowing = (username = '') => {
   return dispatch => {
-    dispatch(fetchUserFollowingsPending());
+    dispatch(fetchUserFollowingPending());
 
     return axios({
-      url: `${urls.baseUrl}${urls.users}${username}/${urls.followings}`,
+      url: `${urls.baseUrl}${urls.users}${username}/${urls.following}`,
       method: 'GET',
     })
       .then((response) => {
-        dispatch(fetchUserFollowingsResolved(response.data));
+        dispatch(fetchUserFollowingResolved(response.data));
       })
       .catch((error) => {
-        dispatch(fetchUserFollowingsRejected(error));
+        dispatch(fetchUserFollowingRejected(error));
       });
   }
 };

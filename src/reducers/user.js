@@ -8,15 +8,15 @@ import {
   FETCH_USER_FOLLOWERS_PENDING,
   FETCH_USER_FOLLOWERS_RESOLVED,
   FETCH_USER_FOLLOWERS_REJECTED,
-  FETCH_USER_FOLLOWINGS_PENDING,
-  FETCH_USER_FOLLOWINGS_RESOLVED,
-  FETCH_USER_FOLLOWINGS_REJECTED,
+  FETCH_USER_FOLLOWING_PENDING,
+  FETCH_USER_FOLLOWING_RESOLVED,
+  FETCH_USER_FOLLOWING_REJECTED,
 } from '../actions/user';
 
 const initialState = {
-  status: '',
+  status: 'resolved',
   error: null,
-  user: {},
+  user: require('../mock/userDetail.json'),
   repos: {
     status: '',
     error: null,
@@ -27,10 +27,10 @@ const initialState = {
     error: null,
     followers: [],
   },
-  followings: {
+  following: {
     status: '',
     error: null,
-    followings: [],
+    following: [],
   },
 };
 
@@ -114,30 +114,30 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case FETCH_USER_FOLLOWINGS_PENDING: {
+    case FETCH_USER_FOLLOWING_PENDING: {
       return {
         ...state,
-        followings: {
-          ...state.followings,
+        following: {
+          ...state.following,
           status: 'pending',
         },
       };
     }
-    case FETCH_USER_FOLLOWINGS_RESOLVED: {
+    case FETCH_USER_FOLLOWING_RESOLVED: {
       return {
         ...state,
-        followings: {
-          ...state.followings,
+        following: {
+          ...state.following,
           status: 'resolved',
-          followings: action.payload.followings,
+          following: action.payload.following,
         },
       };
     }
-    case FETCH_USER_FOLLOWINGS_REJECTED: {
+    case FETCH_USER_FOLLOWING_REJECTED: {
       return {
         ...state,
-        followings: {
-          ...state.followings,
+        following: {
+          ...state.following,
           status: 'rejected',
           error: action.payload.error,
         },

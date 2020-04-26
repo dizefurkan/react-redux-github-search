@@ -4,7 +4,7 @@ import {
   fetchUser,
   fetchUserRepos,
   fetchUserFollowers,
-  fetchUserFollowings
+  fetchUserFollowing
 } from '../../actions/user';
 
 import UserDetail from '../../atomic/pages/UserDetail';
@@ -25,16 +25,16 @@ const mapStateToProps = (state) => ({
     status: state.user.followers.status,
     error: state.user.followers.error,
   },
-  followings: {
-    data: state.user.followings.followings,
-    status: state.user.followings.status,
-    error: state.user.followings.error,
+  following: {
+    data: state.user.following.following,
+    status: state.user.following.status,
+    error: state.user.following.error,
   },
 });
 
 export const mapDispatchToProps = (dispatch) => ({
   fetchUser: (username) => {
-    dispatch(fetchUser(username));
+    // dispatch(fetchUser(username));
   },
   fetchUserRepos: (username) => {
     dispatch(fetchUserRepos(username));
@@ -42,8 +42,8 @@ export const mapDispatchToProps = (dispatch) => ({
   fetchUserFollowers: (username) => {
     dispatch(fetchUserFollowers(username));
   },
-  fetchUserFollowings: (username) => {
-    dispatch(fetchUserFollowings(username));
+  fetchUserFollowing: (username) => {
+    dispatch(fetchUserFollowing(username));
   },
 });
 
