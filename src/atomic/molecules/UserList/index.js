@@ -10,8 +10,8 @@ const UserList = ({ users }) => {
       <Text text={`${users.length} user`} className="font-bold" />
       <ul>
         {users.map(user => (
-          <li className="mb-5 hover:bg-blue-200 p-3">
-            <Link to={`/detail/${user.login}`} className="flex flex-row items-center">
+          <li className="hover:bg-blue-200">
+            <Link to={`/detail/${user.login}`} className="flex flex-row items-center p-3">
               <div className="w-5 mr-3"><Image url={user.avatar_url} width="30px" height="30px" rounded /></div>
               <Text text={user.login} />
             </Link>
