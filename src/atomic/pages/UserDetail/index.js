@@ -34,9 +34,15 @@ const UserDetail = (props) => {
 
   const changeFollowersModalVisibility = () => {
     setUserFollowersModalVisibility(!isUserFollowersModalVisible);
+    if (isUserFollowingModalVisible) {
+      setUserFollowingModalVisible(false);
+    }
   };
   const changeFollowingModalVisibility = () => {
     setUserFollowingModalVisible(!isUserFollowingModalVisible);
+    if (isUserFollowersModalVisible) {
+      setUserFollowersModalVisibility(false);
+    }
   };
 
   return (
