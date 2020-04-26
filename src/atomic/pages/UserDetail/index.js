@@ -41,10 +41,10 @@ const UserDetail = (props) => {
       {user.status === 'pending' && <Text text="Loading..." />}
       {user.status === 'resolved' &&
         <React.Fragment>
-          <Image url={user.avatar_url} width="100px" height="100px" />
-          <Text text={user.login} />
-          <Button onClick={changeFollowersModalVisibility} text={`${user.followers} Followers`} />
-          <Button onClick={changeFollowingModalVisibility} text={`${user.following} Following`} />
+          <Image url={user.data.avatar_url} width="100px" height="100px" />
+          <Text text={user.data.login} />
+          <Button onClick={changeFollowersModalVisibility} text={`${user.data.followers} Followers`} />
+          <Button onClick={changeFollowingModalVisibility} text={`${user.data.following} Following`} />
         </React.Fragment>
       }
       {user.status === 'rejected' && <Text text="Ups, something wrong with fetch user data" />}

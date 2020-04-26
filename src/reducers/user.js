@@ -14,9 +14,9 @@ import {
 } from '../actions/user';
 
 const initialState = {
-  status: 'resolved',
+  status: '',
   error: null,
-  user: require('../mock/userDetail.json'),
+  user: {},
   repos: {
     status: '',
     error: null,

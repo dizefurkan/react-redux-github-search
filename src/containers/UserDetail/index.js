@@ -34,7 +34,7 @@ const mapStateToProps = (state) => ({
 
 export const mapDispatchToProps = (dispatch) => ({
   fetchUser: (username) => {
-    // dispatch(fetchUser(username));
+    dispatch(fetchUser(username));
   },
   fetchUserRepos: (username) => {
     dispatch(fetchUserRepos(username));
