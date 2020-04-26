@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
@@ -9,10 +9,10 @@ import Link from '../../atoms/Link';
 import { debounce } from '../../../utils';
 
 const UserSearch = ({ data, status, error, fetchUsers }) => {
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = useState('');
   const onInputChange = value => setInputValue(value);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchUsers(inputValue);
   }, [inputValue]);
 
