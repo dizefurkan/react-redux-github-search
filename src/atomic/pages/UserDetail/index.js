@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import Image from '../../atoms/Image';
-import Text from '../../atoms/Text';
+import UserCard from '../../molecules/UserCard';
+import Repos from '../../molecules/Repos';
+import UserList from '../../molecules/UserList';
+
 import Button from '../../atoms/Button';
-import Link from '../../atoms/Link';
 import Modal from '../../atoms/Modal';
+import Text from '../../atoms/Text';
 
 const UserDetail = (props) => {
   const { username } = props.match.params;
@@ -27,7 +29,7 @@ const UserDetail = (props) => {
     fetchUserRepos(username);
     fetchUserFollowers(username);
     fetchUserFollowing(username);
-  }, []);
+  }, [username]);
 
   const changeFollowersModalVisibility = () => {
     setUserFollowersModalVisibility(!isUserFollowersModalVisible);
@@ -41,41 +43,23 @@ const UserDetail = (props) => {
       {user.status === 'pending' && <Text text="Loading..." />}
       {user.status === 'resolved' &&
         <React.Fragment>
-          <Image url={user.data.avatar_url} width="100px" height="100px" />
-          <Text text={user.data.login} />
-          <Button onClick={changeFollowersModalVisibility} text={`${user.data.followers} Followers`} />
-          <Button onClick={changeFollowingModalVisibility} text={`${user.data.following} Following`} />
+          <UserCard user={user} />
+          <div className="mb-10 space-x-3">
+            <Button onClick={changeFollowersModalVisibility} text={`${user.data.followers} Followers`} />
+            <Button onClick={changeFollowingModalVisibility} text={`${user.data.following} Following`} />
+          </div>
+          <Repos repos={repos} />
         </React.Fragment>
       }
       {user.status === 'rejected' && <Text text="Ups, something wrong with fetch user data" />}
       {isUserFollowersModalVisible &&
         <Modal closeModal={changeFollowersModalVisibility}>
-          <div>{followers.data.length}</div>
-          <ul className="mt-3">
-            {followers.data.map(follower => (
-              <li>
-                <Link to={`/detail/${follower.login}`}>
-                  <Image url={follower.avatar_url} width="30px" height="30px" rounded />
-                  <Text text={follower.login} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <UserList users={followers.data} />
         </Modal>
       }
       {isUserFollowingModalVisible &&
         <Modal closeModal={changeFollowingModalVisibility}>
-          <div>{following.data.length}</div>
-          <ul className="mt-3">
-            {following.data.map(following => (
-              <li>
-                <Link to={`/detail/${following.login}`}>
-                  <Image url={following.avatar_url} width="30px" height="30px" rounded />
-                  <Text text={following.login} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <UserList users={following.data} />
         </Modal>
       }
     </div>

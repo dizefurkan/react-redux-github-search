@@ -26,7 +26,7 @@ const UserSearch = ({ data, status, error, fetchUsers }) => {
           <ul className="mt-3">
             <Text text={`${data.length} user found`} className="mb-3 text-gray-500" />
             {data.map(item => (
-              <li className="mb-4">
+              <li className="mb-4 p-4 hover:bg-blue-200">
                 <Link to={`/detail/${item.login}`} className="flex flex-row space-x-4 items-center">
                   <Image url={item.avatar_url} width="50px" height="50px" rounded />
                   <Text text={item.login} />

@@ -34,16 +34,16 @@ const mapStateToProps = (state) => ({
 
 export const mapDispatchToProps = (dispatch) => ({
   fetchUser: (username) => {
-    dispatch(fetchUser(username));
+    // dispatch(fetchUser(username));
   },
   fetchUserRepos: (username) => {
-    dispatch(fetchUserRepos(username));
+    // dispatch(fetchUserRepos(username));
   },
   fetchUserFollowers: (username) => {
-    dispatch(fetchUserFollowers(username));
+    // dispatch(fetchUserFollowers(username));
   },
   fetchUserFollowing: (username) => {
-    dispatch(fetchUserFollowing(username));
+    // dispatch(fetchUserFollowing(username));
   },
 });
 

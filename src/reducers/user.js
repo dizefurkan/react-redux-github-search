@@ -14,23 +14,23 @@ import {
 } from '../actions/user';
 
 const initialState = {
-  status: '',
+  status: 'resolved',
   error: null,
-  user: {},
+  user: require('../mock/user.json'),
   repos: {
-    status: '',
+    status: 'resolved',
     error: null,
-    repos: [],
+    repos: require('../mock/repos.json'),
   },
   followers: {
-    status: '',
+    status: 'resolved',
     error: null,
-    followers: [],
+    followers: require('../mock/followers'),
   },
   following: {
-    status: '',
+    status: 'resolved',
     error: null,
-    following: [],
+    following: require('../mock/following'),
   },
 };
 
