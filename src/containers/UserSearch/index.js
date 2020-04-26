@@ -1,9 +1,21 @@
 import { connect } from 'react-redux';
 
+import { search as searchAction } from '../../actions/search';
+
 import UserSearch from '../../atomic/organisms/UserSearch';
 
 const mapStateToProps = (state) => ({
-  search: state.search,
+  data: state.search.items,
+  status: state.search.status,
+  error: state.search.error,
 });
 
-export default connect(mapStateToProps, null)(UserSearch);
+const mapDispatchToProps = (dispatch) => ({
+  fetchUsers: (inputValue) => {
+    dispatch(searchAction(inputValue));
+  }
+})
+
+const UserSearchContainer = connect(mapStateToProps, mapDispatchToProps)(UserSearch);
+
+export default UserSearchContainer;

@@ -5,8 +5,8 @@ import {
 } from '../actions/search';
 
 const initialState = {
-  items: [],
-  pending: false,
+  items: require('../mock/users.json'),
+  status: '',
   error: null,
 };
 
@@ -15,22 +15,21 @@ export default (state = initialState, action) => {
     case SEARCH_PENDING: {
       return {
         ...state,
-        pending: true,
+        status: 'pending',
       };
     }
     case SEARCH_RESOLVED: {
       return {
         ...state,
-        pending: false,
+        status: 'resolved',
         items: action.payload.items,
       };
     }
     case SEARCH_REJECTED: {
       return {
         ...state,
-        pending: false,
+        status: 'rejected',
         error: action.payload.error,
-        items: [],
       };
     }
     default:

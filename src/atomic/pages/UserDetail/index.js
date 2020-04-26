@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import Image from '../../atoms/Image';
 import Text from '../../atoms/Text';
@@ -7,53 +6,40 @@ import Button from '../../atoms/Button';
 import Link from '../../atoms/Link';
 import Modal from '../../atoms/Modal';
 
-import { fetchUser } from '../../../actions/user';
-
 const UserDetail = (props) => {
   const { username } = props.match.params;
-  const { user, pending, dispatch, error } = props;
-
-  const [userFollowers, setUserFollowers] = useState([]);
-  const [userFollowings, setUserFollowings] = useState([]);
+  const {
+    user,
+    repos,
+    followers,
+    followings,
+    fetchUser,
+    fetchUserRepos,
+    fetchUserFollowers,
+    fetchUserFollowings,
+  } = props;
 
   const [isUserFollowersModalVisible, setUserFollowersModalVisibility] = useState(false);
   const [isUserFollowingsModalVisible, setUserFollowingsModalVisible] = useState(false);
 
-  const [userDataStatus, setUserDataStatus] = useState('');
-
   useEffect(() => {
-    dispatch(fetchUser(username));
+    fetchUser(username);
+    fetchUserRepos(username);
+    fetchUserFollowers(username);
+    fetchUserFollowings(username);
   }, []);
 
   const changeFollowersModalVisibility = () => {
     setUserFollowersModalVisibility(!isUserFollowersModalVisible);
-    if (!userFollowers.length) {
-      axios({
-        url: user.followers_url,
-        method: 'GET'
-      })
-        .then(result => {
-          setUserFollowers(result.data);
-        })
-    }
   };
   const changeFollowingsModalVisibility = () => {
     setUserFollowingsModalVisible(!isUserFollowingsModalVisible);
-    if (!userFollowers.length) {
-      axios({
-        url: user.following_url,
-        method: 'GET'
-      })
-        .then(result => {
-          setUserFollowings(result.data);
-        })
-    }
   };
 
   return (
     <div>
-      {pending && <Text text="Loading..." />}
-      {!pending &&
+      {user.status === 'pending' && <Text text="Loading..." />}
+      {user.status === 'resolved' &&
         <React.Fragment>
           <Image url={user.avatar_url} width="100px" height="100px" />
           <Text text={user.login} />
@@ -61,16 +47,16 @@ const UserDetail = (props) => {
           <Button onClick={changeFollowingsModalVisibility} text={`${user.following} Following`} />
         </React.Fragment>
       }
-      {!pending && error && <Text text="Ups, something wrong with fetch user data" />}
+      {user.status === 'rejected' && <Text text="Ups, something wrong with fetch user data" />}
       {isUserFollowersModalVisible &&
         <Modal closeModal={changeFollowersModalVisibility}>
-          <div>{userFollowers.length}</div>
+          <div>{followers.data.length}</div>
           <ul className="mt-3">
-            {userFollowers.map(item => (
+            {followers.data.map(follower => (
               <li>
-                <Link to={`/detail/${item.login}`}>
-                  <Image url={item.avatar_url} width="30px" height="30px" rounded />
-                  <Text text={item.login} />
+                <Link to={`/detail/${follower.login}`}>
+                  <Image url={follower.avatar_url} width="30px" height="30px" rounded />
+                  <Text text={follower.login} />
                 </Link>
               </li>
             ))}
@@ -79,13 +65,13 @@ const UserDetail = (props) => {
       }
       {isUserFollowingsModalVisible &&
         <Modal closeModal={changeFollowingsModalVisibility}>
-          <div>{userFollowings.length}</div>
+          <div>{followings.data.length}</div>
           <ul className="mt-3">
-            {userFollowings.map(item => (
+            {followings.data.map(following => (
               <li>
-                <Link to={`/detail/${item.login}`} replace={true}>
-                  <Image url={item.avatar_url} width="30px" height="30px" rounded />
-                  <Text text={item.login} />
+                <Link to={`/detail/${following.login}`}>
+                  <Image url={following.avatar_url} width="30px" height="30px" rounded />
+                  <Text text={following.login} />
                 </Link>
               </li>
             ))}
