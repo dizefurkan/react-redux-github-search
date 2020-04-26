@@ -19,9 +19,7 @@ npm install
 - Container Pattern
 
 ## Work with Mock Data
-
-### Why?
-Because GitHub API v3 has a request limition. I create a folder inside `/src/mock`
+In default everything (Search and User Detail) was working with Restfull API. I request to github api. But... GitHub API v3 has a request limition. That's why i create a folder inside `/src/mock`
 
 ### How to use?
 ```javascript
