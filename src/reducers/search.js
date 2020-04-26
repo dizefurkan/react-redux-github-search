@@ -5,7 +5,7 @@ import {
 } from '../actions/search';
 
 const initialState = {
-  items: require('../mock/users.json'),
+  items: [],
   status: '',
   error: null,
 };

@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUsers: (inputValue) => {
     dispatch(searchAction(inputValue));
   }
-})
+});
 
 const UserSearchContainer = connect(mapStateToProps, mapDispatchToProps)(UserSearch);
 
