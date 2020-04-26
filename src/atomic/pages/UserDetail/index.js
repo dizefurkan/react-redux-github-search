@@ -25,6 +25,7 @@ const UserDetail = (props) => {
   const [isUserFollowingModalVisible, setUserFollowingModalVisible] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     fetchUser(username);
     fetchUserRepos(username);
     fetchUserFollowers(username);
