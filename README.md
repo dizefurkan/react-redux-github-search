@@ -11,7 +11,10 @@ npm install
 ```
 
 ## What's in the box?
-- React fully used React.Hooks API
+- React fully used React Hooks API
+- react-router-dom // for routing
+  - /
+  - /details/:username
 - Redux // for state management
 - Axios // for request
 - Tailwind CSS
