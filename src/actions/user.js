@@ -75,7 +75,7 @@ export const fetchUserRepos = (username = '') => {
     dispatch(fetchUserReposPending());
 
     return axios({
-      url: `${urls.baseUrl}${urls.users}${username}/${urls.repos}`,
+      url: `${urls.baseUrl}${urls.users}${username}${urls.repos}`,
       method: 'GET',
     })
       .then((response) => {
@@ -110,7 +110,7 @@ export const fetchUserFollowers = (username = '') => {
     dispatch(fetchUserFollowersPending());
 
     return axios({
-      url: `${urls.baseUrl}${urls.users}${username}/${urls.followers}`,
+      url: `${urls.baseUrl}${urls.users}${username}${urls.followers}`,
       method: 'GET',
     })
       .then((response) => {
@@ -145,7 +145,7 @@ export const fetchUserFollowing = (username = '') => {
     dispatch(fetchUserFollowingPending());
 
     return axios({
-      url: `${urls.baseUrl}${urls.users}${username}/${urls.following}`,
+      url: `${urls.baseUrl}${urls.users}${username}${urls.following}`,
       method: 'GET',
     })
       .then((response) => {
