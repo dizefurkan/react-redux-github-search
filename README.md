@@ -10,6 +10,8 @@ Use the [npm](https://npmjs.com/) package manager to install.
 npm install
 ```
 
+![Demo Gif](githubsearch.gif)
+
 ## What's in the box?
 - React fully used React Hooks API
 - react-router-dom // for routing
@@ -20,6 +22,8 @@ npm install
 - Tailwind CSS
 - Atomic Design
 - Container Pattern
+
+![File, Folder Structure](file-folder-structure.png)
 
 ## Work with Mock Data
 In default everything (Search and User Detail) was working with Restfull API. I request to github api. But... GitHub API v3 has a request limition. That's why i create a folder inside `/src/mock`
